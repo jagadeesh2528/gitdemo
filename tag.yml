@@ -2,14 +2,14 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
 steps:
 - checkout: self
   persistCredentials: true
 
 - powershell: |
-    $newSourceBranch = "v1.0.0" -replace 'refs/tags/', 'v1.0.0' 
+    $newSourceBranch = "v1.1.0" -replace 'refs/tags/', '' 
     $Command = "##vso[build.addbuildtag]"+$newSourceBranch 
     write-host "Create a Build TAG called $newSourceBranch" 
     write-host $Command
