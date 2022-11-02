@@ -1,0 +1,18 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- checkout: self
+  persistCredentials: true
+
+- powershell: |
+    $newSourceBranch = "v1.0.0" -replace 'refs/tags/', 'v1.0.0' 
+    $Command = "##vso[build.addbuildtag]"+$newSourceBranch 
+    write-host "Create a Build TAG called $newSourceBranch" 
+    write-host $Command
+    git tag $newSourceBranch
+    git push origin $newSourceBranch
+  workingDirectory: $(Build.SourcesDirectory)
