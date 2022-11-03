@@ -13,7 +13,7 @@ jobs:
         inputs:
           targetType: inline
           script: 
-            $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+            $headers = New-Object "System.Collections.Generic.Dictionary[[String],[int]]"
             $headers.Add("Authorization", "Bearer $env:SYSTEM_ACCESSTOKEN")
             $headers.Add("Content-Type", "application/json")
             $uri = "https://dev.azure.com/{azuredevopsorg4}/{Android}/_apis/build/builds/$(Build.BuildId)/tags/{V4.0.0}?api-version=6.0"
