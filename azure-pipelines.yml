@@ -1,0 +1,17 @@
+pool:
+  name: Azure Pipelines
+variables:
+  my.tag: ''
+
+steps:
+- powershell: |
+   Write-Host "##vso[task.setvariable variable=my.tag;]build_1"       
+  displayName: 'Set var value'
+
+- powershell: |
+   Write-Host "##vso[build.addbuildtag]$(my.tag)"       
+  displayName: 'Set tag'
+
+- powershell: |
+   Write-Host "$(my.tag)"       
+  displayName: 'View tag'
