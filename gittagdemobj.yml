@@ -6,7 +6,7 @@ jobs:
     steps:
       - task: PowerShell@2
         displayName: 'Add Build Tag'
-        condition: succeeded()
+        # condition: succeeded()
         
         env:
           SYSTEM_ACCESSTOKEN: $(System.AccessToken)
