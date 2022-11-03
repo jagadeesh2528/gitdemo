@@ -1,0 +1,20 @@
+jobs:
+  - job: build
+    displayName: 'Build job'
+  
+
+    steps:
+      - task: PowerShell@2
+        displayName: 'Add Build Tag'
+        condition: succeeded()
+        
+        env:
+          SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+        inputs:
+          targetType: inline
+          script: 
+            $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+            $headers.Add("Authorization", "Bearer $env:SYSTEM_ACCESSTOKEN")
+            $headers.Add("Content-Type", "application/json")
+            $uri = "https://dev.azure.com/{organization}/{project}/_apis/build/builds/$(Build.BuildId)/tags/{tag}?api-version=6.0"
+            Invoke-RestMethod -Uri $uri -Headers $headers -Method PUT
